@@ -1,0 +1,124 @@
+<Window x:Class="D2RCharViewer.UI.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="D2R Character Viewer" Height="600" Width="800"
+        WindowStartupLocation="CenterScreen"
+        Background="#2b2b2b"
+        Foreground="#ffffff">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <!-- Header -->
+        <StackPanel Grid.Row="0" Orientation="Vertical" Padding="20" Background="#1e1e1e">
+            <TextBlock FontSize="24" FontWeight="Bold" Text="{Binding CharacterName}"/>
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0" Spacing="20">
+                <TextBlock FontSize="14" Text="{Binding CharacterClass, StringFormat='Class: {0}'}"/>
+                <TextBlock FontSize="14" Text="{Binding Level, StringFormat='Level: {0}'}"/>
+                <TextBlock FontSize="14" Text="{Binding Experience, StringFormat='Exp: {0:N0}'}"/>
+            </StackPanel>
+        </StackPanel>
+
+        <!-- Tab Control -->
+        <TabControl Grid.Row="1" Padding="10">
+            <TabItem Header="Stats">
+                <StackPanel Orientation="Vertical" Padding="20" Spacing="10">
+                    <TextBlock FontSize="14" FontWeight="Bold" Text="Attributes"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Orientation="Vertical" Spacing="5">
+                            <TextBlock Text="Strength" FontWeight="Bold"/>
+                            <TextBlock Text="{Binding DisplayStats.Attributes.Strength}"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Orientation="Vertical" Spacing="5">
+                            <TextBlock Text="Dexterity" FontWeight="Bold"/>
+                            <TextBlock Text="{Binding DisplayStats.Attributes.Dexterity}"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="2" Orientation="Vertical" Spacing="5">
+                            <TextBlock Text="Vitality" FontWeight="Bold"/>
+                            <TextBlock Text="{Binding DisplayStats.Attributes.Vitality}"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="3" Orientation="Vertical" Spacing="5">
+                            <TextBlock Text="Energy" FontWeight="Bold"/>
+                            <TextBlock Text="{Binding DisplayStats.Attributes.Energy}"/>
+                        </StackPanel>
+                    </Grid>
+
+                    <Separator Margin="0,10"/>
+
+                    <TextBlock FontSize="14" FontWeight="Bold" Text="Resistances"/>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <StackPanel Grid.Column="0" Orientation="Vertical" Spacing="5">
+                            <TextBlock Text="Fire" FontWeight="Bold"/>
+                            <TextBlock Text="{Binding DisplayStats.Resistances.Fire}"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="1" Orientation="Vertical" Spacing="5">
+                            <TextBlock Text="Cold" FontWeight="Bold"/>
+                            <TextBlock Text="{Binding DisplayStats.Resistances.Cold}"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="2" Orientation="Vertical" Spacing="5">
+                            <TextBlock Text="Lightning" FontWeight="Bold"/>
+                            <TextBlock Text="{Binding DisplayStats.Resistances.Lightning}"/>
+                        </StackPanel>
+                        <StackPanel Grid.Column="3" Orientation="Vertical" Spacing="5">
+                            <TextBlock Text="Poison" FontWeight="Bold"/>
+                            <TextBlock Text="{Binding DisplayStats.Resistances.Poison}"/>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </TabItem>
+
+            <TabItem Header="Health">
+                <StackPanel Orientation="Vertical" Padding="20" Spacing="10">
+                    <StackPanel Orientation="Horizontal" Spacing="20">
+                        <StackPanel Orientation="Vertical" Spacing="5">
+                            <TextBlock Text="Life" FontWeight="Bold"/>
+                            <TextBlock Text="{Binding DisplayStats.Life, StringFormat='{0} / '}"/>
+                        </StackPanel>
+                        <StackPanel Orientation="Vertical" Spacing="5">
+                            <TextBlock Text="Mana" FontWeight="Bold"/>
+                            <TextBlock Text="{Binding DisplayStats.Mana, StringFormat='{0} / '}"/>
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
+
+            <TabItem Header="Chronicle">
+                <StackPanel Orientation="Vertical" Padding="20" Spacing="10">
+                    <TextBlock FontSize="14" FontWeight="Bold" Text="Statistics"/>
+                    <StackPanel Orientation="Vertical" Spacing="5">
+                        <TextBlock Text="{Binding DisplayStats.ChronicleStats.MonstersKilled, StringFormat='Monsters Killed: {0}'}"/>
+                        <TextBlock Text="{Binding DisplayStats.ChronicleStats.ItemsPickedUp, StringFormat='Items Picked Up: {0}'}"/>
+                        <TextBlock Text="{Binding DisplayStats.ChronicleStats.NormalMonsters, StringFormat='Normal Monsters: {0}'}"/>
+                        <TextBlock Text="{Binding DisplayStats.ChronicleStats.ChampionMonsters, StringFormat='Champion Monsters: {0}'}"/>
+                        <TextBlock Text="{Binding DisplayStats.ChronicleStats.UniqueMonsters, StringFormat='Unique Monsters: {0}'}"/>
+                    </StackPanel>
+                </StackPanel>
+            </TabItem>
+        </TabControl>
+
+        <!-- Status Bar -->
+        <StatusBar Grid.Row="2" Background="#1e1e1e" Foreground="#ffffff" Padding="10">
+            <StatusBarItem>
+                <TextBlock Text="{Binding StatusMessage}"/>
+            </StatusBarItem>
+            <StatusBarItem HorizontalAlignment="Right">
+                <TextBlock Text="{Binding LastUpdate, StringFormat='Last updated: {0:HH:mm:ss}'}"/>
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+</Window>
